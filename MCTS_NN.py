@@ -133,19 +133,16 @@ class MCTS_NN:
                 dirichlet_list = np.random.dirichlet(dirichlet_input)
                 proba_children = (1 - epsilon) * probs + epsilon * dirichlet_list
 
-            #explain this sign (was wtf sign)
             leaf.W = leaf.W  - NN_q_value
             leaf.N += 1
             leaf.Q = leaf.W / leaf.N
 
-            #to delete at some point
             if config.maskinmcts:
                 mask = np.zeros(config.L)
                 for child in leaf.children:
                     child_col=game.convert_move_to_col_index(child.move)
                     mask[child_col] = 1
 
-                #soit je masque les ph du learning, soit je ne masque pas ici, n'est ce pas???
                 maskit = np.multiply(proba_children, mask)
 
                 # for possible bug (when proba given by NN is strictly one for a full column)
