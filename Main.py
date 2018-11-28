@@ -105,7 +105,8 @@ def launch():
         # Model has improved, then save model, save data:
         if (winp1+draws/2)/(winp1 + winp2 + draws) >= config.threshold :
             improved = 1
-
+        else:
+            improved = 0
         if improved == 1:
             total_improved += 1
             time.sleep(0.01)
@@ -132,7 +133,6 @@ def launch():
 
         # Model has not improved : throw everything away and start again:
         else:
-            improved = 0
             time.sleep(0.01)
             print('model has not improved enough, score is only', 100*(winp1 + draws / 2) / (winp1 + winp2 + draws), '%' )
             best_player_so_far = previous_best
