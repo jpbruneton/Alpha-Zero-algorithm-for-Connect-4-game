@@ -641,8 +641,10 @@ def winrate_against_mcts(player, sim_number, self_play_loop_number,
             w_nn_start+= w_start
             w_nn_second += w_second
             file.close()
-
-    ratio_starter = w_nn_start/winp1
+    if winp1 == 0:
+        ratio_starter = 0
+    else:
+        ratio_starter = w_nn_start/winp1
     return winp1, winp2, draws, ratio_starter
 
 
